@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package pb;
+
+message Cart {
+  string id = 1;
+  string description = 2;
+  map<string,int32> products = 3;
+  int32 totalItems = 4;
+  double totalCost = 5;
+  enum Status {
+    NONE = 0;
+    CREATED = 1;
+    PLACED = 2;
+    SHIPPED = 3;
+  }
+  Status status = 6;
+}
+
+message CartId {
+    string id = 1;
+}
+
+message CartQuantity {
+  string cartId = 1;
+  string productId = 2;
+  int32 quantity = 3;
+}
+
+service CartService {
+  rpc Create (Cart) returns (Cart) {}
+  rpc FindOne (CartId) returns (Cart) {}
+  rpc FindAll (google.protobuf.Empty) returns (stream Cart) {}
+  rpc Update (Cart) returns (Cart) {}
+  rpc Delete (CartId) returns (google.protobuf.Empty) {}
+  rpc AddToCart (CartQuantity) returns (Cart) {}
+  rpc RemoveFromCart (CartQuantity) returns (Cart) {}
+}

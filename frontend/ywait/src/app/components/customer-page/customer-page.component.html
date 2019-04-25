@@ -1,0 +1,51 @@
+<div class="customerInfo">
+  <mat-card class="customerInfoCard">
+    <mat-card-header>
+      <mat-card-title>
+        <span class="iconText">
+          <mat-icon class="titleIcon">person_outline</mat-icon>
+          Customer info
+        </span>
+      </mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="form">
+      <div>
+        <mat-form-field>
+          <mat-label>
+            <mat-icon>person</mat-icon>
+            Name
+          </mat-label>
+          <input matInput formControlName="nameFormCtrl" placeholder="name">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>
+            <mat-icon>location_on</mat-icon>
+            Address
+          </mat-label>
+          <input matInput formControlName="addressFormCtrl" placeholder="address">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>
+            <mat-icon>call</mat-icon>
+            Phone
+          </mat-label>
+          <input matInput formControlName="phoneFormCtrl" placeholder="phone number">
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div *ngIf="orderPlaced">
+      order id: {{orderId}}
+    </div>
+    <mat-card-actions>
+      <button *ngIf="!orderPlaced" mat-raised-button color="primary" (click)="placeOrder()">
+        Place Order
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
